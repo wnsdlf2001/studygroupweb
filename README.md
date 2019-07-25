@@ -12,6 +12,5 @@ How to use
 3. execute studyloop.sql inside WebContent folder
 
 * edit studyloop/views/notice/webSocket.jsp 
-inline 23
-var ws = new WebSocket("ws://localhost:8080/studyloop/websocket/chat");
-localhost -> my IP address to activate websocket function
+- var ws = new WebSocket("ws://localhost:8080/studyloop/websocket/chat");
+- localhost -> my IP address to activate websocket function
