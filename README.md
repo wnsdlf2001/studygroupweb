@@ -10,6 +10,8 @@ How to use
 1. clone repository to your local computer 
 2. import project on your Eclipse IDE
 3. execute studyloop.sql inside WebContent folder
+4. start url : http://localhost:8080/studyloop/main.do
+
 
 * edit studyloop/views/notice/webSocket.jsp 
 - var ws = new WebSocket("ws://localhost:8080/studyloop/websocket/chat");
