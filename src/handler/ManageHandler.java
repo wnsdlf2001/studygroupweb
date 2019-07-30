@@ -35,7 +35,13 @@ public class ManageHandler {
 	
 	@RequestMapping("/manageindex")
 	public ModelAndView calendarPageprocess(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-
+		int membernum = userDao.getUsers().size();
+		int studynum = searchDao.getStudies().size();
+		int boardnum = boardDao.getAllboardarticles().size();
+		
+		req.setAttribute("membernum", membernum);
+		req.setAttribute("studynum", studynum);
+		req.setAttribute("boardnum", boardnum);
 		return new ModelAndView("views/admin/adminindex");
 	}
 	

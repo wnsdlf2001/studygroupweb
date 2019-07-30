@@ -35,22 +35,28 @@
                             <li> <a href="index4.html">처리 현황</a> </li>
                         </ul>
                     </li>
-                    <li> <a href="javascript:void(0);" class="waves-effect"><i class="linea-icon linea-basic fa-fw text-danger" data-icon="7"></i> <span class="hide-menu text-danger"> 스터디 관리 <span class="fa arrow"></span> <span class="label label-rouded label-danger pull-right">HOT</span></span></a>
+                    <li> <a href="javascript:void(0);" class="waves-effect"><i class="linea-icon linea-basic fa-fw text-danger" data-icon="7"></i> <span class="hide-menu text-danger"> 스터디 관리 <span class="fa arrow"></span> <span class="label label-rouded label-danger pull-right">${studynum}</span></span></a>
                         <ul class="nav nav-second-level">
                             <li> <a href="studymanage.do">스터디 확인</a> </li>
                             <li> <a href="studymanage.do">스터디 삭제</a> </li>
                         </ul>
                     </li>
-                    <li><a href="inbox.html" class="waves-effect"><i data-icon=")" class="linea-icon linea-basic fa-fw"></i> <span class="hide-menu">회원 관리 <span class="fa arrow"></span></span></a>
+                    <li><a href="inbox.html" class="waves-effect"><i data-icon=")" class="linea-icon linea-basic fa-fw"></i> <span class="hide-menu">회원 관리 <span class="fa arrow"></span><span class="label label-rouded label-info pull-right">${membernum}</span></span></a>
                         <ul class="nav nav-second-level">
                             <li><a href="userreport.do">유저 확인</a></li>
         					<li><a href="userreport.do">유저 탈퇴</a></li>
                         </ul>
                     </li>
-                    <li> <a href="#" class="waves-effect"><i data-icon="/" class="linea-icon linea-basic fa-fw"></i> <span class="hide-menu">게시글 관리<span class="fa arrow"></span> <span class="label label-rouded label-info pull-right">13</span> </span></a>
+                    <li> <a href="#" class="waves-effect"><i data-icon="/" class="linea-icon linea-basic fa-fw"></i> <span class="hide-menu">게시글 관리<span class="fa arrow"></span> <span class="label label-rouded label-info pull-right">${boardnum}</span> </span></a>
                         <ul class="nav nav-second-level">
                             <li><a href="boardreport.do">게시글 확인</a></li>
                             <li><a href="boardreport.do">게시글 삭제</a></li>
+                        </ul>
+                    </li>
+                    <li> <a href="#" class="waves-effect"><i data-icon="/" class="linea-icon linea-basic fa-fw"></i> <span class="hide-menu">후기 관리<span class="fa arrow"></span> <span class="label label-rouded label-info pull-right">13</span> </span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="boardreport.do">후기 보기</a></li>
+                            <li><a href="boardreport.do">후기 승인</a></li>
                         </ul>
                     </li>
                    </ul>
