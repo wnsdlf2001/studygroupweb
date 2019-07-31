@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,6 +59,7 @@
                     </a>
                 <!-- multistep form -->
                 <form id="msform" name="submitform">
+                
                     <!-- progressbar -->
                     <ul id="eliteregister">
                         <li class="active">이메일을 인증하세요</li>
@@ -66,7 +68,12 @@
                     </ul>
                     <!-- fieldsets -->
                     <fieldset>
-                        <h2 class="fs-title">이메일 인증을 진행하세요</h2>
+                    	<c:if test="${invalid==null}">
+                        <h2 class="fs-title">이메일 인증을 진행하세요.</h2>
+                        </c:if>
+                        <c:if test="${invalid!=null}">
+                        <h2 class="fs-title">이미 가입되어 있는 이메일입니다. 다른 이메일로 가입하세요.</h2>
+                        </c:if>
                         <input id="emailinput" type="text" name="email" placeholder="Email" />
                         <input type="button" name="next" class="action-button" value="인증번호 전송" onclick="return authProcess()" />         
                     </fieldset>
@@ -96,6 +103,7 @@
     <script src="../../studyloop/default/js/custom.min.js"></script>
     <!--Style Switcher -->
     <script src="../../studyloop/default/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+
 </body>
 
 </html>

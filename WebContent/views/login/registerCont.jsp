@@ -82,7 +82,7 @@
                         </div>                         
                                     <span style="padding-left: 60px" >
                                         <select class="custom-select col-8" id="inlineFormCustomSelect" name="gender">                                   
-                                            <option selected>성별</option>
+                                            <option selected value="0">성별</option>
                                             <option value="남">남</option>
                                             <option value="여">여</option>
                                         </select>
@@ -120,7 +120,7 @@
                         <input type="text" id="add" name="address" placeholder="주소"/>
                         <input type="text" id="sadd" name="saddress" placeholder="상세 주소" />
                         <input type="button" name="previous" class="previous action-button" value="이전" />
-                        <input type="button" name="submit" class="submit action-button" value="회원가입" onclick="submitUser()" />
+                        <input type="button" name="submit" class="submit action-button" value="설문 완료하고 가입하기" onclick="return submitUser()" />
                     </fieldset>
                 <div class="clear"></div>
             </div>

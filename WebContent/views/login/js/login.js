@@ -127,6 +127,7 @@ function checkauthnum(randnum){
 	}
 }
 
+
 function submitUser(){
 	
     var f = document.submitform; //폼 name
@@ -134,6 +135,7 @@ function submitUser(){
     form.setAttribute("charset", "UTF-8");
     form.setAttribute("method", "Post");  //Post 방식
     form.setAttribute("action", "inputPro.do"); //요청 보낼 주소
+ 
     
     var hiddenField = document.createElement("input");
     hiddenField.setAttribute("type", "hidden");
@@ -141,54 +143,101 @@ function submitUser(){
     hiddenField.setAttribute("value", f.email.value);
     form.appendChild(hiddenField);
 
+    if(f.nick.value == null || f.nick.value ==""){
+    	alert("닉네임을 입력하세요");
+    	return false;
+    }
+    else{
+    	console.log($("#nickres").text())
+    	if($("#nickres").text() == "사용할 수 없는 닉네임 입니다."){   		
+    		alert("사용 불가능한 닉네임 입니다.");
+    		return false;
+    	}
+    }
     hiddenField = document.createElement("input");
     hiddenField.setAttribute("type", "hidden");
     hiddenField.setAttribute("name", "nick");
     hiddenField.setAttribute("value", f.nick.value);
     form.appendChild(hiddenField);
 
+    if(f.name.value == null || f.name.value ==""){
+    	alert("이름을 입력하세요");
+    	return false;
+    }  
     hiddenField = document.createElement("input");
     hiddenField.setAttribute("type", "hidden");
     hiddenField.setAttribute("name", "name");
     hiddenField.setAttribute("value", f.name.value);
     form.appendChild(hiddenField);
       
+    if(f.birth.value == null || f.birth.value ==""){
+    	alert("생년월일을 입력하세요");
+    	return false;
+    }    
     hiddenField = document.createElement("input");
     hiddenField.setAttribute("type", "hidden");
     hiddenField.setAttribute("name", "birth");
     hiddenField.setAttribute("value", f.birth.value);
     form.appendChild(hiddenField);
     
+    
+    if(f.gender.value == null || f.gender.value =="0"){
+    	alert("성별을 선택하세요");
+    	return false;
+    }  
     hiddenField = document.createElement("input");
     hiddenField.setAttribute("type", "hidden");
     hiddenField.setAttribute("name", "gender");
     hiddenField.setAttribute("value", f.gender.value);
     form.appendChild(hiddenField);
     
+    if(f.phone.value == null || f.phone.value ==""){
+    	alert("전화번호를 입력하세요");
+    	return false;
+    }  
     hiddenField = document.createElement("input");
     hiddenField.setAttribute("type", "hidden");
     hiddenField.setAttribute("name", "phone");
     hiddenField.setAttribute("value", f.phone.value);
     form.appendChild(hiddenField);
     
+    if(f.passwd.value == null || f.passwd.value ==""){   	
+    	alert("비밀번호를 입력하세요");
+    	return false;
+    } 
+    else{
+    	if(f.passwd.value != f.repasswd.value){
+        	alert("비밀번호를 다시 확인하세요");
+        	return false;
+    	}
+    }
     hiddenField = document.createElement("input");
     hiddenField.setAttribute("type", "hidden");
     hiddenField.setAttribute("name", "passwd");
     hiddenField.setAttribute("value", f.passwd.value);
     form.appendChild(hiddenField);
     
+    if(f.address.value == null || f.address.value ==""){   	
+    	alert("주소를 입력하세요");
+    	return false;
+    } 
     hiddenField = document.createElement("input");
     hiddenField.setAttribute("type", "hidden");
     hiddenField.setAttribute("name", "address");
     hiddenField.setAttribute("value", f.address.value);
     form.appendChild(hiddenField);
     
+    if(f.saddress.value == null || f.saddress.value ==""){   	
+    	alert("상세 주소를 입력하세요");
+    	return false;
+    } 
     hiddenField = document.createElement("input");
     hiddenField.setAttribute("type", "hidden");
     hiddenField.setAttribute("name", "saddress");
     hiddenField.setAttribute("value", f.saddress.value);
     form.appendChild(hiddenField);
  
+    
     hiddenField = document.createElement("input");
     hiddenField.setAttribute("type", "hidden");
     hiddenField.setAttribute("name", "zipcode");

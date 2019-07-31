@@ -28,16 +28,34 @@ public class LoginRegisterHandler {
 	@Resource
 	private SearchDao searchDao;
 	
+
+	@RequestMapping("/register")
+	public ModelAndView registerprocess(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		
+		if(req.getParameter("invalid") != null) {
+			
+			req.setAttribute("invalid", 1);
+		}
+		return new ModelAndView("views/login/register");
+	}
+	
 	@RequestMapping("/authForm")
 	public ModelAndView authFormprocess(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		String email = req.getParameter("email");
-		Authenticate auth = new Authenticate();
-		String randnum = auth.randnum();
-		auth.sendMail(email, randnum);
-		
-		req.setAttribute("email", email);
-		req.setAttribute("randnum", randnum);
-		return new ModelAndView("views/login/registerCont");
+		if(userDao.getUserinfo(email) != null) {
+			resp.sendRedirect("register.do?invalid=1");
+			return new ModelAndView("views/login/register");
+		}
+		else {
+			Authenticate auth = new Authenticate();
+			String randnum = auth.randnum();
+			auth.sendMail(email, randnum);
+			
+			req.setAttribute("email", email);
+			req.setAttribute("randnum", randnum);
+			return new ModelAndView("views/login/registerCont");
+		}
+
 	}
 	@RequestMapping("/delForm")
 	public ModelAndView delFormprocess(HttpServletRequest req, HttpServletResponse resp) throws Exception {
@@ -148,6 +166,8 @@ public class LoginRegisterHandler {
 		
 		//rate
 		userDto.setRate(0.0);
+		
+		
 		int result = userDao.insertUser(userDto);
 		
 		System.out.println(userDto.getEmail());
@@ -156,6 +176,13 @@ public class LoginRegisterHandler {
 		
 		return new ModelAndView("views/login/inputPro");
 	}
+	
+	@RequestMapping("/surveyform")
+	public ModelAndView surveyFormprocess(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		return new ModelAndView("views/login/survey");
+	}
+	
+	
 	
 	//로그인 처리하는 부분
 	@RequestMapping("/loginPro")
@@ -174,11 +201,6 @@ public class LoginRegisterHandler {
 		req.setAttribute("result", result);
 		
 		return new ModelAndView("views/login/loginPro");
-	}
-
-	@RequestMapping("/register")
-	public ModelAndView registerprocess(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		return new ModelAndView("views/login/register");
 	}
 	
 	@RequestMapping("/primecheck")
