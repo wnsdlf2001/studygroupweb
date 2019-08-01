@@ -15,6 +15,7 @@ import databean.CategoryTempBean;
 import databean.CertificateDataBean;
 import databean.ExpDataBean;
 import databean.LanguageDataBean;
+import databean.LocTmpDataBean;
 import databean.SchoolDataBean;
 import databean.StudyDataBean;
 import databean.StudyReportDataBean;
@@ -152,9 +153,9 @@ public class SearchDBBean implements SearchDao{
 	}
 	
 	@Override
-	public List<String> getLocationList() {
+	public List<LocTmpDataBean> getLocationList(String keyword) {
 		
-		return SqlMapClient.getSession().selectList("Studyloop.getLocationList");
+		return SqlMapClient.getSession().selectList("Studyloop.getLocationList", keyword);
 	} 
 	
 	@Override

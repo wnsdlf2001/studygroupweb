@@ -29,6 +29,7 @@ import databean.CategoryDataBean;
 import databean.CertificateDataBean;
 import databean.ExpDataBean;
 import databean.LanguageDataBean;
+import databean.LocTmpDataBean;
 import databean.ScheduleDataBean;
 import databean.SchoolDataBean;
 import databean.StudyDataBean;
@@ -65,7 +66,7 @@ public class MainSearchHandler {
     
         List<StudyDataBean> studyDtoList = searchDao.searchByKeyWord(keyword);
 
-        List<String> locationList = searchDao.getLocationList();
+        List<LocTmpDataBean> locationList = searchDao.getLocationList(keyword);
         
         if(cat != null) {
         	List<StudyDataBean> studyDtoFilterList = new ArrayList<StudyDataBean>();

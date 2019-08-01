@@ -183,8 +183,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
    		select * from ws_studyinfo where loc_id in (select id from ws_location where detail_loc like  '%' ||  #{keyword} || '%') 
    	</select> 
    	
-   	<select id="getLocationList" resultType="String">
-   		select detail_loc from ws_location
+   	<select id="getLocationList" resultType="databean.LocTmpDataBean">
+   		select l.detail_loc, s.loc_id, count(l.detail_loc) as num
+        from ws_location l, ws_studyinfo s
+        where l.id = s.loc_id
+        and s.title like '%' ||  #{keyword} || '%' group by l.detail_loc, s.loc_id
    	</select>
 	
 	<select id="getParticipateStudy" parameterType="int" resultType="databean.StudyDataBean">

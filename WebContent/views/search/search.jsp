@@ -1,3 +1,4 @@
+<%@page import="databean.LocTmpDataBean"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="databean.CategoryDataBean"%>
@@ -116,13 +117,13 @@
 				<form name="loclistform" method="get" action="search.do">
 				<div class="[ form-group ]">
 					<%
-						List<String> locationList = (List<String>) request.getAttribute("locationList");
+						List<LocTmpDataBean> locationList = (List<LocTmpDataBean>) request.getAttribute("locationList");
 						int num = 0;
 						for (int i = 0; i < locationList.size(); i++) {
-							String loc = locationList.get(i);
+							LocTmpDataBean loc = locationList.get(i);
 					%>
 					<input type="checkbox" name="loclist"
-						id="fancy-checkbox-primary<%=++num%>" autocomplete="off" value="<%=loc%>"/>
+						id="fancy-checkbox-primary<%=++num%>" autocomplete="off" value="<%=loc.getDetail_loc()%>"/>
 					<div class="[ btn-group ]"
 						style="padding-top: 10px; padding-right: 10px; padding-bottom: 20px;">
 						<label for="fancy-checkbox-primary<%=num%>"
@@ -130,7 +131,7 @@
 							class="[ glyphicon glyphicon-ok ]"></span> <span> </span>
 						</label> 
 						<label for="fancy-checkbox-primary<%=num%>"
-							class="[ btn btn-default active ]"> <%=loc%>
+							class="[ btn btn-default active ]"> <%=loc.getDetail_loc()%> (<%=loc.getNum()%>)
 						</label>
 					</div>
 					<%

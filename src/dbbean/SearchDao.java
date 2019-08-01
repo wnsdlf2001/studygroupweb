@@ -13,6 +13,7 @@ import databean.CategoryDataBean;
 import databean.CertificateDataBean;
 import databean.ExpDataBean;
 import databean.LanguageDataBean;
+import databean.LocTmpDataBean;
 import databean.SchoolDataBean;
 import databean.StudyDataBean;
 import databean.StudyReportDataBean;
@@ -24,7 +25,7 @@ public interface SearchDao {
 	public List<StudyDataBean> getStudyThumbNail();
 	public List<StudyDataBean> searchByKeyWord(String keyword);
 	public List<StudyDataBean> searchByLocation(String keyword);
-	public List<String> getLocationList();
+	public List<LocTmpDataBean> getLocationList(String keyword);
 	public String searchByLoc(int loc_id);
 	public int insertSchooldata(SchoolDataBean schoolDto);
 	public int insertCareerdata(ExpDataBean expDto);
