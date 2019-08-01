@@ -19,6 +19,12 @@ public class UserDataBean {
 	private double rate;
 	private Timestamp regdate;
 	private int point;
+	private String visit;
+	private String interest;
+	private String goal;
+	private String open;
+	private String part;
+	
 	
 	public int getPoint() {
 		return point;
@@ -140,6 +146,36 @@ public class UserDataBean {
 	public void setRegdate(Timestamp regdate) {
 		this.regdate = regdate;
 	}
-
+	public String getVisit() {
+		return visit;
+	}
+	public void setVisit(String visit) {
+		this.visit = visit;
+	}
+	public String getInterest() {
+		return interest;
+	}
+	public void setInterest(String interest) {
+		this.interest = interest;
+	}
+	public String getGoal() {
+		return goal;
+	}
+	public void setGoal(String goal) {
+		this.goal = goal;
+	}
+	public String getOpen() {
+		return open;
+	}
+	public void setOpen(String open) {
+		this.open = open;
+	}
+	public String getPart() {
+		return part;
+	}
+	public void setPart(String part) {
+		this.part = part;
+	}
+	
 	
 }

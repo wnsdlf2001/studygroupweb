@@ -167,19 +167,29 @@ public class LoginRegisterHandler {
 		//rate
 		userDto.setRate(0.0);
 		
-		
-		int result = userDao.insertUser(userDto);
-		
-		System.out.println(userDto.getEmail());
-		
-		req.setAttribute("result", result);
-		
-		return new ModelAndView("views/login/inputPro");
+		//설문 추가 
+		//int result = userDao.insertUser(userDto);
+		//req.setAttribute("result", result);
+		req.getSession().setAttribute("tmpuserDto", userDto);
+		return new ModelAndView("views/login/survey");
 	}
 	
-	@RequestMapping("/surveyform")
+	@RequestMapping("/surveyfinish")
 	public ModelAndView surveyFormprocess(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		return new ModelAndView("views/login/survey");
+		UserDataBean userDto = (UserDataBean) req.getSession().getAttribute("tmpuserDto");
+		String visit = String.join("@",  req.getParameterValues("visit"));		
+		String interest =String.join("@", req.getParameterValues("interest"));
+		String goal = String.join("@", req.getParameterValues("goal"));
+		String open = req.getParameter("open");
+		String part = req.getParameter("part");
+		userDto.setVisit(visit);
+		userDto.setInterest(interest);
+		userDto.setGoal(goal);
+		userDto.setOpen(open);
+		userDto.setPart(part);
+		int result = userDao.insertUser(userDto);
+		req.setAttribute("result", result);
+		return new ModelAndView("views/login/inputPro");
 	}
 	
 	

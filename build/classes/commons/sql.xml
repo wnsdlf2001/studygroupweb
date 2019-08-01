@@ -10,8 +10,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<!-- 유저 회원가입 -->
 	<insert id="insertUser" parameterType="databean.UserDataBean">
 		insert into ws_user values
-		(SEQ_WS_USER_id.NEXTVAL, #{email}, #{name}, #{nick}, #{pic}, to_date(#{birth}, 'dd/MM/yyyy'), #{gender}, #{phone}, 
-		#{passwd}, #{prime}, #{rate}, #{point}, #{regdate}, #{address}, #{zipcode})		
+		(SEQ_WS_USER_id.NEXTVAL, #{email}, #{name}, #{nick}, #{pic}, to_date(#{birth}, 'MM/dd/yyyy'), #{gender}, #{phone}, 
+		#{passwd}, #{prime}, #{rate}, #{point}, #{regdate}, #{address}, #{zipcode}, #{visit}, #{interest}, #{goal}, #{open}, #{part})		
 	</insert>
 	
 	<!-- 유저 정보 가져오기  --> 

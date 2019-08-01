@@ -120,7 +120,7 @@
                         <input type="text" id="add" name="address" placeholder="주소"/>
                         <input type="text" id="sadd" name="saddress" placeholder="상세 주소" />
                         <input type="button" name="previous" class="previous action-button" value="이전" />
-                        <input type="button" name="submit" class="submit action-button" value="설문 완료하고 가입하기" onclick="return submitUser()" />
+                        <input type="button" name="submit" class="submit action-button" value="설문 작성" onclick="return submitUser()" />
                     </fieldset>
                 <div class="clear"></div>
             </div>
