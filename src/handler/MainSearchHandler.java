@@ -99,6 +99,7 @@ public class MainSearchHandler {
         }
         
         if(daylist != null) { //화목 
+        	List<StudyDataBean> studyDtoFilterList = new ArrayList<StudyDataBean>();
         	for(int i=0; i<studyDtoList.size(); i++) {
         		StudyDataBean studyDto = studyDtoList.get(i);
         		String sdays = searchDao.getStudyTimeDays(studyDto.getStudytime_id()); //화금
@@ -115,10 +116,12 @@ public class MainSearchHandler {
         				break;
         			}
         		}
-        		if(check==0) {
-        			studyDtoList.remove(i);
+        		if(check==1) {
+        			//studyDtoList.remove(i);
+        			studyDtoFilterList.add(studyDto);
         		}
-        	}	
+        	}
+        	studyDtoList = studyDtoFilterList;
         }
         
         if(sort != null) {
