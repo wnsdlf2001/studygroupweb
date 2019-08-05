@@ -1281,7 +1281,8 @@
     });
     
     function showLocation(pos){
-    	alert(pos.coords.latitude+"  "+pos.coords.longitude)
+    	//alert(pos.coords.latitude+"  "+pos.coords.longitude)
+    	
     }
     
  	</script>

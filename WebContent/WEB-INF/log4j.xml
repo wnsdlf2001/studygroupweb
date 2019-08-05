@@ -9,11 +9,32 @@
         </layout>  
     </appender>
     
-    <!-- root 설정 -->
-    <root>
+    
+    <appender name="rolling" class="org.apache.log4j.RollingFileAppender">
+		<!-- 로그 파일 생성위치 -->
+		<param name="file" value="c:/logs/log.log" />
+		<param name="Append" value="true" />
+		<!-- 로그 파일 하나당 사이즈 5m -->
+		<param name="MaxFileSize" value="5000kb" />
+		<!-- 최대 생성 파일수 ( 50개가 넘으면 순차적으로 파일이 삭제됨 -->
+		<param name="MaxBackupIndex" value="50" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %-5p %C{1}.%M(%F:%L) - %m%n" />
+		</layout>
+	</appender>
+
+    
+<!--     <root>
         <level value="INFO" />
         <appender-ref ref="infoConsole" />
-    </root>
-     
+        <appender-ref ref="rolling" />
+    </root> -->
+ 	<logger name="studyloop" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="infoConsole" />
+		<appender-ref ref="rolling" />
+	</logger>
+
 </log4j:configuration>
 

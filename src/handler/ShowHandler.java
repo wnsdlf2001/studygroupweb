@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -53,13 +54,17 @@ public class ShowHandler {
 	
 	@RequestMapping("/view")
 	public ModelAndView viewPro(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		Logger log1 = Logger.getLogger("studyloop");
+
+		
 		HttpSession session = req.getSession( true );
 		
 		//int study_id = 1; // for temporary selected study data
 		int study_id = Integer.parseInt( req.getParameter("sid") );	// studyId parameter
-		
+		log1.debug("클릭한 스터디 아이디 :  "+study_id);
 		//int tuser_id = 5; // for temporary signed-user data
 		UserDataBean userDto = (UserDataBean) req.getSession().getAttribute("userDto"); //세션에서 가져온 유저 정보
+		log1.debug(userDto.getEmail());
 		if(userDto != null) {
 			userDto = userDao.getUserById(userDto.getId());
 		}

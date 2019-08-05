@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -255,6 +256,10 @@ public class MainSearchHandler {
 	
 	@RequestMapping("/main")
 	public ModelAndView mainFormprocess(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		Logger log1 = Logger.getLogger("studyloop");
+
+		log1.debug("ddsfsdfsfdsfsfsdf");
+		
 		
 		CategoryDataBean categoryDto = searchDao.loadCategory();
 		req.setAttribute("categoryDto", categoryDto);
