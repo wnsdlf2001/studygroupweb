@@ -58,6 +58,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
       select * from ws_studyinfo
    	</select> 
    	
+   	<select id="getStudyThumbNailofnear" resultType="databean.StudyDataBean" parameterType="java.util.Map">
+   		select * from ws_studyinfo s, ws_location l where s.loc_id = l.id and
+		(select DISTNACE_WGS84(l.latitude, l.longitude, #{lat}, #{long}) from dual) &lt; 25
+   	</select>
+   	
    	<select id="getStudyThumbNailofnew" resultType="databean.StudyDataBean">
 		select s.ID ID,
 		s.TITLE TITLE,

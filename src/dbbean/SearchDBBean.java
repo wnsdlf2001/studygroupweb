@@ -293,4 +293,9 @@ public class SearchDBBean implements SearchDao{
 		return SqlMapClient.getSession().update("Studyloop.closeStudy", sid);
 		
 	}
+	
+	@Override
+	public List<StudyDataBean> getStudyThumbNailofnear(Map<String, String> cord) {		
+		return SqlMapClient.getSession().selectList("Studyloop.getStudyThumbNailofnear", cord);
+	}
 }

@@ -260,14 +260,26 @@ public class MainSearchHandler {
 
 		log1.debug("ddsfsdfsfdsfsfsdf");
 		
+		Map<String,String> cord = new HashMap<String,String>();
+		cord.put("lat", "0");
+		cord.put("long", "0");
+		if(req.getSession().getAttribute("lat") != null) {
+			String latitude = (String) req.getSession().getAttribute("lat");
+			String longtitude = (String) req.getSession().getAttribute("long");				
+			cord.replace("lat", latitude);
+			cord.replace("long", longtitude);
+		}
 		
 		CategoryDataBean categoryDto = searchDao.loadCategory();
 		req.setAttribute("categoryDto", categoryDto);
 		//전체 다 가져오기
-		ArrayList<StudyDataBean> studyDtoList = (ArrayList<StudyDataBean>) searchDao.getStudyThumbNail();
+		//ArrayList<StudyDataBean> studyDtoList = (ArrayList<StudyDataBean>) searchDao.getStudyThumbNail();
 		
 		//새로운 스터디 가져오기
 		ArrayList<StudyDataBean> nstudyDtoList = (ArrayList<StudyDataBean>) searchDao.getStudyThumbNailofnew();
+		
+		//근방 5km 이내 스터디 가져오기
+		//ArrayList<StudyDataBean> nstudyDtoList = (ArrayList<StudyDataBean>) searchDao.getStudyThumbNailofnear(cord);
 		
 		//핫한 스터디 가져오기
 		ArrayList<StudyDataBean> hstudyDtoList = (ArrayList<StudyDataBean>) searchDao.getStudyThumbNailofhot();
@@ -275,7 +287,7 @@ public class MainSearchHandler {
 		//프리미엄 스터디 가져오기
 		ArrayList<StudyDataBean> pstudyDtoList = (ArrayList<StudyDataBean>) searchDao.getStudyThumbNailofpremium();
 		
-	    req.setAttribute("studyDtoList", studyDtoList );
+	    //req.setAttribute("studyDtoList", studyDtoList );
 	    req.setAttribute("nstudyDtoList", nstudyDtoList );
 	    req.setAttribute("hstudyDtoList", hstudyDtoList );
 	    req.setAttribute("pstudyDtoList", pstudyDtoList );

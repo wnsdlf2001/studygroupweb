@@ -1272,7 +1272,6 @@
     $(document).ready(function() {        
         // Geolocation API에 액세스할 수 있는지를 확인
         if (navigator.geolocation) {
-        	console.log("dd");
             //위치 정보를 얻기
             navigator.geolocation.getCurrentPosition (showLocation);
         } else {
@@ -1281,6 +1280,8 @@
     });
     
     function showLocation(pos){
+    	localStorage.setItem("lat", pos.coords.latitude)
+    	localStorage.setItem("long", pos.coords.longitude)
     	//alert(pos.coords.latitude+"  "+pos.coords.longitude)
     	
     }

@@ -44,7 +44,7 @@
     <section id="wrapper" class="login-register">
         <div class="login-box">
             <div class="white-box">
-                <form class="form-horizontal form-material" id="loginform" action="loginPro.do" method="post">
+                <form class="form-horizontal form-material" id="loginform" action="javascript:login()" method="post" name="loginform">
                 	<%
                 	if(fail.equals("1")){
                 	%>
@@ -127,6 +127,47 @@
     <script src="../../studyloop/default/js/custom.min.js"></script>
     <!--Style Switcher -->
     <script src="../../studyloop/default/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+    <script>
+    	function login(){
+    		var latitude = localStorage.getItem("lat");
+    		var longtitude = localStorage.getItem("long");
+    		
+    		var f = document.loginform; //폼 name
+    		var form = document.createElement("form");
+    	    form.setAttribute("charset", "UTF-8");
+    	    form.setAttribute("method", "Post");  //Post 방식
+    	    form.setAttribute("action", "loginPro.do"); //요청 보낼 주소
+    	    
+    	    var hiddenField = document.createElement("input");
+    	    hiddenField.setAttribute("type", "hidden");
+    	    hiddenField.setAttribute("name", "email");
+    	    hiddenField.setAttribute("value", f.email.value);
+    	    form.appendChild(hiddenField);
+    	    
+    	    hiddenField = document.createElement("input");
+    	    hiddenField.setAttribute("type", "hidden");
+    	    hiddenField.setAttribute("name", "passwd");
+    	    hiddenField.setAttribute("value", f.passwd.value);
+    	    form.appendChild(hiddenField);
+    	    
+    	    hiddenField = document.createElement("input");
+    	    hiddenField.setAttribute("type", "hidden");
+    	    hiddenField.setAttribute("name", "lat");
+    	    hiddenField.setAttribute("value", latitude);
+    	    form.appendChild(hiddenField);
+    	    
+    	    hiddenField = document.createElement("input");
+    	    hiddenField.setAttribute("type", "hidden");
+    	    hiddenField.setAttribute("name", "long");
+    	    hiddenField.setAttribute("value", longtitude);
+    	    form.appendChild(hiddenField);
+    	    
+    	    
+    	    document.body.appendChild(form);
+    	    form.submit();
+    	
+    	}
+    </script>
 </body>
 
 </html>

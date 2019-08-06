@@ -209,6 +209,8 @@ public class LoginRegisterHandler {
 		}
 		req.setAttribute("email", email);
 		req.setAttribute("result", result);
+		req.getSession().setAttribute("lat", req.getParameter("lat"));
+		req.getSession().setAttribute("long", req.getParameter("long"));
 		
 		return new ModelAndView("views/login/loginPro");
 	}
