@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
    	
    	<select id="getStudyThumbNailofnear" resultType="databean.StudyDataBean" parameterType="java.util.Map">
    		select * from ws_studyinfo s, ws_location l where s.loc_id = l.id and
-		(select DISTNACE_WGS84(l.latitude, l.longitude, #{lat}, #{long}) from dual) &lt; 25
+		(select DISTNACE_WGS84(l.latitude, l.longitude, #{lat}, #{long}) from dual) &lt;= 25
    	</select>
    	
    	<select id="getStudyThumbNailofnew" resultType="databean.StudyDataBean">
@@ -684,11 +684,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<select id="getRateByUserId" parameterType="int" resultType="double">
        select rate from WS_USER where id=#{user_id}
    </select>
-
-	<delete id="deleteComment" parameterType="java.util.Map">
-        delete from WS_COMMENT
-        where id = #{comment_id} and board_id = #{board_id} and study_id = #{study_id}
-    </delete>   
+	
+	<delete id="deleteComment" parameterType="int">
+	       delete from WS_COMMENT
+	       where id = #{comment_id}
+	</delete>
    
 </mapper>
 

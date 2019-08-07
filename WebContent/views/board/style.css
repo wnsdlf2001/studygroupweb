@@ -7,3 +7,12 @@
 	top: -27px;
 	left: -7px;
 }
+
+.contd {
+	width: 80%;
+}
+
+.hiddentd {
+	width: 10%;
+	color: transparent;
+}

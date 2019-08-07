@@ -4,6 +4,9 @@ public class LocationDataBean {
 	private int id;
 	private String state_city;
 	private String detail_loc;
+	private double latitude;
+	private double longitude;
+	
 	public int getId() {
 		return id;
 	}
@@ -21,5 +24,17 @@ public class LocationDataBean {
 	}
 	public void setDetail_loc(String detail_loc) {
 		this.detail_loc = detail_loc;
+	}
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 }

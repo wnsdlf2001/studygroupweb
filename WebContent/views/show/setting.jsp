@@ -35,6 +35,7 @@
 <c:set var="str_attendee" value="현재 참석자 정보"/>
 <c:set var="str_primiumfnc" value="  ( premium 기능  )"/>
 <c:set var="str_comment" value="스터디장의 코멘트"/>
+<c:set var="str_locinfo" value="위치 정보"/>
 <c:set var="str_chatwith" value="스터디장과 오픈채팅 연결"/>
 
 <!-- attendee str -->

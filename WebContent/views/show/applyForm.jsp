@@ -21,8 +21,8 @@
 		<!-- Menu CSS -->
 		<link href="../../studyloop/default/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
 		<!-- Custom CSS -->
-		<link href="${project}css/style.css" rel="stylesheet">
 		<link href="../../studyloop/default/css/style.css" rel="stylesheet">
+		<link href="${project}css/style.css" rel="stylesheet">
 		<!-- Date picker plugins css -->
 		<link href="../../studyloop/default/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css"/>
 		<!-- animation CSS -->

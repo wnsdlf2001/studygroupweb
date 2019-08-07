@@ -10,6 +10,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html>
 
@@ -45,10 +46,10 @@
 	    <link href="../../studyloop/default/css/colors/megna.css" id="theme" rel="stylesheet">
 	
 	</head>
-		 <%
+		<%--  <%
 		    List<UserDataBean> HattendCheckTable = (List<UserDataBean>)request.getAttribute("getHattendCheckTable");
 			
-		 %>
+		 %> --%>
 <body class="fix-sidebar">
 <!-- Preloader -->
     <div class="preloader">
@@ -58,7 +59,7 @@
     <jsp:include page="../search/upperBar.jsp"/>
     
 <!-- Left navbar-header -->
-
+	
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse slimscrollsidebar">
                 <ul class="nav" id="side-menu">
@@ -66,35 +67,37 @@
                     <li> <a href="javascript:void(0);" class="waves-effect"><i class="linea-icon linea-basic fa-fw text-danger" data-icon="7"></i> <span class="hide-menu text-danger">주최중인 스터디<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
                         
-                        
+                   <%--      
                         <%
                          
                         List<StudyDataBean> studyDtoList = (List<StudyDataBean>)request.getAttribute("studyDtoList");
 							for (int i=0; i<studyDtoList.size(); i++) {
-						%>
+						%> --%>
+						<c:forEach var="studyDto" items="${studyDtoList}">
                         	
-                            <li><a href="attend.do?hsid=<%=studyDtoList.get(i).getId()%>"><%=studyDtoList.get(i).getTitle()%></a></li>
-                        <%
+                            <li><a href="attend.do?hsid=${studyDto.id}">${studyDto.title}</a></li>
+                      <%--   <%
 					}
-                        %>
-                            
+                        %> --%>
+                        </c:forEach>
                         </ul>
                     </li>
                     <li> <a href="javascript:void(0);" class="waves-effect"><i class="linea-icon linea-basic fa-fw text-danger" data-icon="7"></i> <span class="hide-menu text-danger">참여중인 스터디<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
                         
-                        <%
+                      <%--   <%
                     
                         
                         List<StudyDataBean> ateeDtoList = (List<StudyDataBean>)request.getAttribute("ateeDtoList");
 							for (int i=0; i<ateeDtoList.size(); i++) {
-						%>
-                        	
-                            <li><a href="attend.do?hsid=<%=ateeDtoList.get(i).getId()%>&noedit=1"><%=ateeDtoList.get(i).getTitle()%></a></li>
-                        <%
+						%> --%>
+                        <c:forEach var="ateeDto" items="${ateeDtoList}">
+                            <li><a href="attend.do?hsid=${ateeDto.id}&noedit=1">${ateeDto.title}</a></li>
+                      <%--   <%
 					}
-                        %>
+                        %> --%>
                             
+                        </c:forEach>
                         </ul>
                     </li>
                     
@@ -148,7 +151,7 @@
                	</ul>
             </div>
         </div>
-
+    
 	<!-- Left Sidebar End -->
 
         <!-- Page Content -->
@@ -182,8 +185,9 @@
 						                            <div class="button-box">
 						                                <div class="btn-group m-r-10">
 						                                    <button aria-expanded="false" data-toggle="dropdown" class="btn btn-info dropdown-toggle waves-effect waves-light" type="button">Select All <span class="caret"></span></button>
-						                                    
-						                                    <% 
+						                        
+		 				                                    <% 
+						                                    	List<UserDataBean> HattendCheckTable =(List<UserDataBean>)request.getAttribute("getHattendCheckTable");
 						                                    	for(int num=0; num<HattendCheckTable.size(); num++) {
 						                                    %>
 						                                    <ul role="menu" class="dropdown-menu">
@@ -198,7 +202,7 @@
 						                                    }
 						                                    %>
 						                                    
-						                                    <button class="fcbtn btn btn-info btn-outline btn-1f">저장</button>
+						                                    <button type="button" class="fcbtn btn btn-info btn-outline btn-1f" onclick="save()">저장</button>
 						                                </div>
 						                                
 						                            </div>
@@ -225,8 +229,7 @@
 	                                					int idx = 0;
 	                                					int hsid = (Integer)request.getAttribute("hsid");
 															for( int i=0; i<HattendCheckTable.size(); i++ ) {
-																UserDataBean nn = HattendCheckTable.get(i);
-																
+																UserDataBean nn = HattendCheckTable.get(i);	
 														%>
 					                                    
 					                                        <tr>
@@ -246,25 +249,8 @@
 									                                       <input type="radio" class="check" id="flat-radio-c<%=nn.getId()%>" name="flat-radio<%=idx%>" data-radio="icheckbox_flat-red" value="2">
 									                                       <label for="flat-radio-c<%=nn.getId()%>">결석</label> &nbsp;&nbsp;&nbsp;
 									                                   	
-								                                   			<input type="button" class="btn btn-info btn-outline" value="저장" name = "save" onclick="updateStatus(<%=hsid%>, <%=nn.getId()%>, '<%=string.format(today)%>', <%=idx%>)">
+								                                   			<input type="button" class="btn btn-info btn-outline" value="저장" name = "save" onclick="updateStatus(<%=hsid%>, <%=nn.getId()%>, '<%=string.format(today)%>', <%=idx%>)">  
 								 											
-								 											<!-- 나중에 백엔드로 연결할 시 저장 누르면 disabled&checked radio로 바꿔주기 + alert 창으로 저장되었습니다 알려주기-->
-									                             			<!--  
-									                             			<li>
-							                                                    <input type="checkbox" class="check" id="minimal-checkbox-disabled-checked" checked disabled>
-							                                                    <label for="minimal-checkbox-disabled-checked">Disabled &amp; checked</label>
-							                                                </li>
-							                                                
-							                                                
-							                                                
-							                                                 <div class="col-lg-3 col-sm-6 col-xs-12">
-											                                    <h3 class="box-title">Alert Fullwidth top </h3>
-											                                    <button id="" class="btn btn-default btn-outline showtop">Alert Top Full width</button>
-											                                    
-											                                    <div class="myadmin-alert myadmin-alert-icon myadmin-alert-click alert-success myadmin-alert-top alerttop"> <i class="ti-user"></i> This is an example top alert. You can edit what u wish. <a href="#" class="closed">&times;</a> </div>
-											                                </div>
-							                                                
-									                                   		-->
 									                                   						                                   		
 									                                   </li>
 								                               		</ul>
@@ -321,8 +307,8 @@
 					                                        <tr>
 					                                            <td>${atckDto.nick}</td>
 					                                            <td>${atckDto.name}</td>
-					                                            <td>${atckDto.attend_date}</td>
-					                                            <c:if test="${atckDto.attendance == 0 }">
+					                                            <td><fmt:formatDate value="${atckDto.attend_date}" type="date" pattern="yyyy/MM/dd"/></td>
+					                                			<c:if test="${atckDto.attendance == 0 }">
 					                                            <td>출석</td>
 					                                            </c:if>
 					                                            <c:if test="${atckDto.attendance == 1 }">
@@ -350,6 +336,7 @@
        
        </div>
        <!-- page wrapper End -->
+      
 	</div>
 	<!-- Wrapper -->
             

@@ -42,9 +42,15 @@ public class BoardDBBean implements BoardDao {
 		return SqlMapClient.getSession().insert("Studyloop.addComment", commentDto);
 	}
 	
+	
 	@Override
 	public List<BoardDataBean> getAllboardarticles() {
 		
 		return SqlMapClient.getSession().selectList("Studyloop.getAllboardarticles");
+	}
+
+	@Override
+	public int delComment( int comment_id ) {
+		return SqlMapClient.getSession().delete( "Studyloop.deleteComment", comment_id );
 	}
 }

@@ -14,4 +14,5 @@ public interface BoardDao {
 	public int addComment(CommentDataBean commentDto);
 	public int deleteArticle(Map<String,Integer> map);
 	public List<BoardDataBean> getAllboardarticles();
+	public int delComment( int comment_id );
 }

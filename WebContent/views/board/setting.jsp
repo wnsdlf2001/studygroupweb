@@ -6,3 +6,4 @@
 
 <c:set var="project" value="../../studyloop/default/"/>
 
+<c:set var="str_qna" value="스터디 Q & A"/>

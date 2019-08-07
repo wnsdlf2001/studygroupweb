@@ -3,7 +3,18 @@ function updateStatus(hsid, uid, now, idx){
 	console.log(now);
 	console.log(hsid);
 	location = "updateStatus.do?hsid="+hsid+"&uid="+uid+"&now="+now+"&status="+status;
+	
+	alert("출석 체크가 완료되었습니다.");
+	
+	if (status == null) {
+		alert ("출석 상태를 체크해주세요.");
+		
+		// return 
+	}
+	
+	
 }
+
 
 
 (function(i, s, o, g, r, a, m) {

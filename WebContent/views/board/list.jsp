@@ -40,8 +40,8 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title m-b-0">${str_qna}</h3>
-                            <hr>
+                            <!-- <h3 class="box-title m-b-0">${str_qna}</h3>
+                            <hr> -->
                             <div class="table-responsive">
                                 <table id="myTable" class="table table-striped">
                                     <thead>
@@ -97,53 +97,54 @@
     <!-- Custom Theme JavaScript -->
     <script src="${project}js/custom.min.js"></script>
     <script src="${project}plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
-    <script>
-    $(document).ready(function() {
-        //$('#myTable').DataTable();
-            var table = $('#myTable').DataTable({
-                "columnDefs": [{
-                    "visible": false,
-                    "targets": 0
-                }],
-                "order": [
-                    [0, 'desc']
-                ],
-                "displayLength": 25,
-                "drawCallback": function(settings) {
-                    var api = this.api();
-                    var rows = api.rows({
-                        page: 'current'
-                    }).nodes();
-                    var last = null;
+	<script>
+		$(document).ready(function() {
+			//$('#myTable').DataTable();
+			var table = $('#myTable').DataTable({
+				"columnDefs": [{
+					"visible": false,
+					"targets": 0
+					}],
+				"order": [
+					[0, 'desc']
+					],
+				"displayLength": 25,
+				"drawCallback": function(settings) {
+					var api = this.api();
+					var rows = api.rows({
+						page: 'current'
+						}).nodes();
+					var last = null;
 
-                    api.column(0, {
-                        page: 'current'
-                    }).data().each(function(group, i) {
-                        if (last !== group) {
-                        	/* $(rows).eq(i).before(
-                        			'<div class="ribbon-wrapper"><div class="ribbon ribbon-bookmark ribbon-warning">공지</div>'
-                        			);
-                            $(rows).eq(i).attr('id', 'notice-content');
-                            $(rows).after(
-                        			'</div>'
-                        			); */
-                            last = group;
-                        }
-                    });
-                }
-            });
-
-            // order by grouping
-            $('#myTable tbody').on('click', 'tr.group', function() {
-                var currentOrder = table.order()[0];
-                if (currentOrder[0] === 1 && currentOrder[1] === 'asc') {
-                    table.order([1, 'desc']).draw();
-                } else {
-                    table.order([1, 'asc']).draw();
-                }
-            });
-        });
-    </script>
+					api.column(0, {
+						page: 'current'
+					}).data().each(function(group, i) {
+						if (last !== group) {
+							/* $(rows).eq(i).before(
+									'<div class="ribbon-wrapper"><div class="ribbon ribbon-bookmark ribbon-warning">공지</div>'
+									);
+							$(rows).eq(i).attr('id', 'notice-content');
+							$(rows).after(
+									'</div>'
+									); */
+								last = group;
+							}
+						});
+				}
+			});
+			
+			// order by grouping
+			$('#myTable tbody').on('click', 'tr.group', function() {
+				var currentOrder = table.order()[0];
+				
+				if (currentOrder[0] === 1 && currentOrder[1] === 'asc') {
+					table.order([1, 'desc']).draw();
+				} else {
+					table.order([1, 'asc']).draw();
+				}
+			});
+		});
+	</script>
     <!--Style Switcher -->
     <script src="${project}plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
 </body>

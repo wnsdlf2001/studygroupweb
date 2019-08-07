@@ -33,7 +33,7 @@
 		<!-- animation CSS -->
 		<link href="../../studyloop/default/css/animate.css" rel="stylesheet">
 		<!-- Custom CSS -->
-		<!-- <link href="../../studyloop/default/css/style.css" rel="stylesheet"> -->
+		<link href="../../studyloop/default/css/style.css" rel="stylesheet">
 		<link href="${project}css/style.css" rel="stylesheet">
 		<!-- color CSS -->
 		<link href="../../studyloop/default/css/colors/blue.css" id="theme" rel="stylesheet">
@@ -49,17 +49,17 @@
 		  <div class="cssload-speeding-wheel"></div>
 		</div><!-- Preloader -->
 		
-		<div id="page-wrapper">
+		<div id="page-wrapper" style="margin: 0px;">
 			<div class="m-0 p-0">
 				<jsp:include page="../search/upperBar.jsp" flush="false"/>
 			</div>
 			
 		<div id="view-wrapper" class="container-fluid">
-			<div class="row bg-studytitle">
+			<div class="row">
 				<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
 				<!-- .page title -->
 					<hr class="m-1">
-					<h2 class="page-title p-l-10"><br><br>&nbsp;&nbsp;${studyDto.title}<br><br><br></h2>
+					<h2 class="page-title p-l-20 p-r-20 text-center"><br>${studyDto.title}<br><br></h2>
 					<hr class="m-0">
 				<!-- /.page title -->
 				</div><!-- /.col-lg-8 col-md-8 col-sm-12 col-xs-12 -->
@@ -68,9 +68,7 @@
 			<div class="row bg-light">
 				<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
 				<!-- study image -->
-				<div class="white-box">
 					<br><img class="img-responsive img-rounded center-block" src="${studyDto.picture}" width="750px" alt="study_image">
-				</div>
 				<!-- /.study image -->
 				
 				<!-- view nav-bar
@@ -90,7 +88,7 @@
 				
 				<br>
 				<div class="white-box p-t-20">
-				<div class="table-responsive pro-rd p-t-10">
+				<div class="table-responsive p-t-10">
 					<table class="table">
 						<tbody class="text-dark">
 						<tr id="info">
@@ -182,7 +180,7 @@
 							
 							</h4>
 								<div class="table-responsive pro-rd p-t-10">
-								<table class="table attendee-table table-bordered color-bordered-table muted-bordered-table" style="filter: blur(5px);-webkit-filter: blur(5px);">
+								<table class="table attendee-table table-bordered color-bordered-table" style="filter: blur(5px);-webkit-filter: blur(5px);">
 									<tr>
 										<th style = "width: 9%">${str_order}</th>
 										<th style = "width: 15%">${str_school}</th>
@@ -343,6 +341,86 @@
 							</td>
 						</tr>
 						<tr>
+							<th colspan="2" class="text-center">${str_locinfo}</th>
+						</tr>
+						<tr>
+							<td colspan="2" class="text-center maptd">
+								<div id="map"></div>
+								<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2e0b265cbd74fd6a6b07246cad7c00a3&libraries=services">
+								</script>
+								
+								<script>
+									var mapContainer = document.getElementById('map'), 
+									mapOption = {
+										center : new daum.maps.LatLng(${locationDto.latitude}, ${locationDto.longitude}), 
+										level : 5
+									};
+									
+									// create map
+									var map = new daum.maps.Map(mapContainer, mapOption);
+									
+									// create object converts address to coordinates
+									var geocoder = new daum.maps.services.Geocoder();
+									//var myAddress = [ "서울특별시 서초구 서초3동 서초대로 46길 42" ];
+									function myMarker(number, address) {
+										// search coordinates with given address
+										geocoder.addressSearch(
+												address, 
+												function(result, status) {
+													// searching complete
+													if (status === daum.maps.services.Status.OK) { 
+														var coords = new daum.maps.LatLng(
+																//result[0].y, result[0].x
+																${locationDto.latitude}, ${locationDto.longitude}
+															);
+														// marker marks the coordinates as the result
+														var marker = new daum.maps.Marker({
+																map: map, 
+																position: coords
+															});
+														// note a explanation about the location
+														var infowindow = new daum.maps.InfoWindow(
+															{
+																// content : '<div style="width:50px;text-align:center;padding:3px 0;">I</div>'
+																content : '<div style="color:red;">' + '</div>'
+															});
+														//infowindow.open(map, marker);
+														
+														// content to be on the custom overlay : HTML string or document element
+														var content = '<div class="customoverlay">'
+																	+ '    <span class="title">'
+																	+ '<div style="font-style:normal; color:red; font-weight:bold; font-size:1.0em">'
+																	+ '</div>' + ' </span>'
+																	+ '</div>';
+														
+														// position of custom overlay
+														var position = new daum.maps.LatLng(
+																result[0].y, result[0].x
+															);
+														
+														// create custom overlay
+														var customOverlay = new daum.maps.CustomOverlay(
+																{
+																	map : map,
+																	position : position,
+																	content : content,
+																	yAnchor : 스터디루프
+																});
+														
+														// move center of the map to the coordinates given as result
+														map.setCenter(coords);
+														}
+													});
+										}
+									for (i = 0; i < myAddress.length; i++) {
+										myMarker(i + 1, myAddress[i]);
+										}
+								</script>
+								
+								
+							</td>
+						</tr>
+						<tr>
 							<th colspan="2" class="text-center"><br>
 								<input class="inputbutton btn btn-main btn-dark" type="button" value="${btn_prev}" onclick="history.back()">
 								<c:if test="${cntAttendee ge sessionScope.studyDto.max_personnel}">
@@ -368,11 +446,11 @@
 					<!-- board box -->
 					<div class="white-box p-t-20">
 						<hr class="m-0">
-						<h3 class="page-title bg-title p-l-10">&nbsp;&nbsp;&nbsp;${tab_qna}${str_primiumfnc}<br><br></h3>
-						<hr class="m-0"><br><br>
-						<div id="qna" class="text-center">
-							<input class="inputbutton btn btn-main btn-primary" type="button" value="${tab_qna}" onclick="openqna()">
-							<%-- <jsp:include page="../board/list.jsp"></jsp:include> --%>
+						<h3 class="p-l-20">&nbsp;&nbsp;${tab_qna}&nbsp;${str_primiumfnc}<br><br></h3>
+						<hr class="m-0">
+						<div id="qna" class="text-center m-0 p-0">
+							<%-- <input class="inputbutton btn btn-main btn-primary" type="button" value="${tab_qna}" onclick="openqna()"> --%>
+							<jsp:include page="../board/list.jsp"></jsp:include>
 						</div><!-- /#qna -->
 					</div><!-- /.white-box -->
 				</c:if>
@@ -380,9 +458,9 @@
 				</div><!-- /.col-lg-8 col-md-8 col-sm-12 col-xs-12 -->
 				
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 p-r-10 m-b-20">
-					<div class="white-box">
+					<div class="right-sidebar shw-rside">
 					<!-- .right-sidebar -->
-					<aside id="view-sidebar" class="right-sidebar">
+					<aside id="view-sidebar">
 						<!-- .breadcrumb -->
 						<hr class="m-0">
 						<ol class="breadcrumb text-center m-0">
@@ -466,16 +544,6 @@
 		
 		</div><!-- /.container-fluid -->
 		</div><!-- /#page-wrapper -->
-								
-					<!-- <div class="col-sm-12">
-						<div class="white-box p-l-0 p-r-0 p-b-10">
-							<h5 class="box-title fw-500 p-l-20">Location</h5>
-							<iframe
-								src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d117506.98606137399!2d72.5797426!3d23.020345749999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1476988114677"
-								width="100%" height="244" frameborder="0" style="border: 0"
-								allowfullscreen=""></iframe>
-						</div>
-					</div> -->
 
 
 		<!-- jQuery -->
@@ -504,7 +572,8 @@
 		<!-- FontAwesome -->
 		<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
 		<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
-		
+		<!-- for Board -->
+		<script src="../../studyloop/default/plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
 		
 		<script>
 			$( document ).ready( function() {

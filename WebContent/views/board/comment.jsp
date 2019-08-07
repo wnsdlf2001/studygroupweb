@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<link href="./views/board/style.css" rel="stylesheet">
  <script src="../../studyloop/jquery-3.4.1.js"></script>
 </head>
 <body>
@@ -63,28 +64,37 @@ function fn_comment(code){
 /*
  * 댓글 삭제하기(Ajax)
  */
- function fn_delcomment(){ 
-	alert($(this).find(".hiddentd").val());
-    $.ajax({
-        type: 'POST',
-        url: "<c:url value='/board/delComment.do'/>",
-        data: {
-        	"comment_id": $(this).children(".hiddentd").text(),//$(this).parent().parent().children().eq(1).text() 
-        	"board_id": "${board_id}", 
-        	"study_id": "${study_id}"
-        }, 
-        success : function(data){
-            if(data=="success")
-            {
-                getCommentList();
-            }
-        },
-        error:function(request,status,error){
-            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-       }
-        
-    });
-}
+ $(document).on("click", "#delbtn", function() {
+		var btn = $(this);
+		var tr = btn.parent().parent();
+		var td = tr.children();
+		var comment_id = td.eq(1).text();
+		var delconfirm = "댓글을 삭제하시겠습니까?";
+		
+		if ( confirm( delconfirm ) ) {
+			fn_delcomment( comment_id );
+		}
+	});
+	
+ function fn_delcomment(comment_id){ 
+	   $.ajax({
+	       type: 'POST',
+	       url: "<c:url value='/board/delComment.do'/>",
+	       data: {
+	       	"comment_id": comment_id
+	       }, 
+	       success : function(data){
+	           if(data=="success")
+	           {
+	               getCommentList();
+	           }
+	       },
+	       error:function(request,status,error){
+	           alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	      }
+	       
+	   });
+	}
  
 /**
  * 초기 페이지 로딩시 댓글 불러오기
@@ -116,8 +126,10 @@ function getCommentList(){
                 for(i=0; i<data.length; i++){
                     html += "<div>";
                     html += "<div><table class='table'><h6><strong>"+data[i].writer+"&nbsp;/&nbsp;작성 시간 : "+data[i].regdate+"</strong></h6>";
-                    html += "<tr><td class='contd'>" + data[i].content + "</td>"
-                    html += "<td class='btntd'><button class='btn btn-sm btn-mute' onclick='fn_delcomment()'><input type='hidden' class='hiddentd' value='"+data[i].id+"'>댓글 삭제</button></td></tr>";
+                    html += "<tr><td class='contd'>" + data[i].content + "</td>";
+                    html += "<td class='hiddentd'>" + data[i].id + "</td>";
+                    html += "<td><input type='button' id='delbtn' class='btn btn-sm btn-mute' value='댓글 삭제'></td></tr>";
+
                     html += "</table></div>";
                     html += "</div>";
                 }
